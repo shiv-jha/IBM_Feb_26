@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.collect.ImmutableMap;
 
+import ibm.training.setup.BaseClass;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -34,25 +35,12 @@ import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
-class BrowserStackJunit {
+class BrowserStackJunit extends BaseClass {
 	
-	public static AndroidDriver appiumDriver;
-	public static String USERNAME = "sktraining_aznSMe";  
-	public static String AUTOMATE_KEY = "v5SDLeHyH6zWHocUTEGG";
 	
 	@BeforeAll 
 	 static void setUpBeforeClass() throws Exception {
-		DesiredCapabilities cap= new DesiredCapabilities();
-		cap.setCapability("platformName", "Android");
-		cap.setCapability("os_version", "11.0");
-		cap.setCapability("device", "Samsung Galaxy S21 Ultra");
-		cap.setCapability("app", "bs://49419f8dbba53bdec25555bde2636623a28bce7c");
-		cap.setCapability("project", "Training-IBM-Feb-Batch");
-		cap.setCapability("build", "Build 1.3");
-		cap.setCapability("name", "Demo App Test");
-		String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-		appiumDriver = new AndroidDriver(new URL(URL), cap);
-		appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);	
+		setup( "android","bs://49419f8dbba53bdec25555bde2636623a28bce7c","sample native app");	
 	}
 
 	@Test
@@ -72,7 +60,6 @@ class BrowserStackJunit {
 	@Order(2)
 	void menuVerification() {
 		
-		WebDriverWait wait = new WebDriverWait(appiumDriver, 10);
 		List<MobileElement> menus= (List<MobileElement>)appiumDriver.findElementsByXPath("//android.widget.ListView/android.widget.TextView");
 		assertEquals(11, menus.size());
 		System.out.println(menus.size());
