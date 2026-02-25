@@ -1,4 +1,4 @@
-package ibm.training;
+package ibm.training.ios;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ class BrowserstackIos extends BaseClass {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		setup("ios", "bs://d4b63dd37b963dff27922add882dab565a881387", "sample ios app");
+		setupApps("ios", "bs://d4b63dd37b963dff27922add882dab565a881387", "sample ios app");
 	}
 
 	@AfterAll

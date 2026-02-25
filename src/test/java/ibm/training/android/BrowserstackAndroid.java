@@ -1,4 +1,4 @@
-package ibm.training;
+package ibm.training.android;
 
 import java.net.MalformedURLException;
 import java.net.URL;

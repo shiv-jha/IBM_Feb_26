@@ -15,11 +15,12 @@ import io.appium.java_client.ios.IOSDriver;
 
 public class BaseClass {
 	public static AppiumDriver appiumDriver;
+	public static WebDriver driver;
 	public static String USERNAME = "sktraining_aznSMe";  
 	public static String AUTOMATE_KEY = "v5SDLeHyH6zWHocUTEGG";
 	public static WebDriverWait wait;
 
-public static void setup(String platformType,String appPath,String appName) throws MalformedURLException {
+public static void setupApps(String platformType,String appPath,String appName) throws MalformedURLException {
 		
 		DesiredCapabilities cap= new DesiredCapabilities();
 		if(platformType.toLowerCase().equals("android")) {
@@ -48,4 +49,31 @@ public static void setup(String platformType,String appPath,String appName) thro
 		appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		wait = new WebDriverWait(appiumDriver, 10);
 	}
+
+public static void setupBrowser(String platformType,String featureName) throws MalformedURLException {
+	
+	DesiredCapabilities cap= new DesiredCapabilities();
+	if(platformType.toLowerCase().equals("android")) {
+		cap.setCapability("platformName", platformType);
+		cap.setCapability("os_version", "11.0");
+		cap.setCapability("device", "Samsung Galaxy S21 Ultra");
+		cap.setCapability("browserName","chrome");
+	}
+	else {
+		cap.setCapability("platformName", platformType);
+		cap.setCapability("os_version", "15.0");
+		cap.setCapability("device", "iPhone 13");
+		cap.setCapability("browserName","safari");
+	}
+
+	cap.setCapability("realMobile","true");
+	cap.setCapability("project", "Training-IBM-Feb-Batch");
+	cap.setCapability("build", "Build 1.4");
+	cap.setCapability("name", featureName);
+	String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+	driver = new RemoteWebDriver(new URL(URL),cap);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	wait = new WebDriverWait(driver, 10);
+}
+
 }

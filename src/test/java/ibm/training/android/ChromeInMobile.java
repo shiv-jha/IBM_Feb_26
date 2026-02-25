@@ -1,4 +1,4 @@
-package ibm.training;
+package ibm.training.android;
 
 import static org.junit.jupiter.api.Assertions.*;
 

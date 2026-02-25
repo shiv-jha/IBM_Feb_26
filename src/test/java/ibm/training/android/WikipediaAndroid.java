@@ -1,4 +1,4 @@
-package ibm.training;
+package ibm.training.android;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +26,7 @@ class WikipediaAndroid extends BaseClass{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		setup( "android","bs://7c00be543fb646e1eda898567cfc9ed22d274791","Wikipedia app");	
+		setupApps( "android","bs://7c00be543fb646e1eda898567cfc9ed22d274791","Wikipedia app");	
 	}
 
 	@Test

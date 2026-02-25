@@ -1,4 +1,4 @@
-package ibm.training;
+package ibm.training.android;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +40,7 @@ class BrowserStackJunit extends BaseClass {
 	
 	@BeforeAll 
 	 static void setUpBeforeClass() throws Exception {
-		setup( "android","bs://49419f8dbba53bdec25555bde2636623a28bce7c","sample native app");	
+		setupApps( "android","bs://49419f8dbba53bdec25555bde2636623a28bce7c","sample native app");	
 	}
 
 	@Test
