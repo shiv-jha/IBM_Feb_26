@@ -4,18 +4,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 
 public class BaseClass {
-	public static AndroidDriver appiumDriver;
+	public static AppiumDriver appiumDriver;
 	public static String USERNAME = "sktraining_aznSMe";  
-	public static String AUTOMATE_KEY = "";
+	public static String AUTOMATE_KEY = "v5SDLeHyH6zWHocUTEGG";
 	public static WebDriverWait wait;
 
-public static AndroidDriver setup(String platformType,String appPath,String appName) throws MalformedURLException {
+public static void setup(String platformType,String appPath,String appName) throws MalformedURLException {
 		
 		DesiredCapabilities cap= new DesiredCapabilities();
 		if(platformType.toLowerCase().equals("android")) {
@@ -24,16 +28,24 @@ public static AndroidDriver setup(String platformType,String appPath,String appN
 			cap.setCapability("device", "Samsung Galaxy S21 Ultra");
 		}
 		else {
-			//capability for ios
+			cap.setCapability("platformName", platformType);
+			cap.setCapability("os_version", "15.0");
+			cap.setCapability("device", "iPhone 13");
 		}
+
 		cap.setCapability("app", appPath);
 		cap.setCapability("project", "Training-IBM-Feb-Batch");
-		cap.setCapability("build", "Build 1.3");
+		cap.setCapability("build", "Build 1.4");
 		cap.setCapability("name", appName);
 		String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-		appiumDriver = new AndroidDriver(new URL(URL), cap);
+		if(platformType.toLowerCase().equals("android")) {
+			appiumDriver = new AndroidDriver(new URL(URL),cap);
+		}
+		else if(platformType.equals("ios")) {
+			appiumDriver = new IOSDriver(new URL(URL),cap);
+		}
+		
 		appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		wait = new WebDriverWait(appiumDriver, 10);
-		return appiumDriver;	
 	}
 }
