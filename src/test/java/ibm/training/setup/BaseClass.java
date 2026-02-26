@@ -10,14 +10,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
 public class BaseClass {
 	public static AppiumDriver appiumDriver;
 	public static WebDriver driver;
-	public static String USERNAME = "sktraining_aznSMe";  
-	public static String AUTOMATE_KEY = "v5SDLeHyH6zWHocUTEGG";
+	public static String USERNAME = "shiv_o9E5TA";  
+	public static String AUTOMATE_KEY = "Ndz6xKa1bybGeae2QbGs";
 	public static WebDriverWait wait;
 
 public static void setupApps(String platformType,String appPath,String appName) throws MalformedURLException {
@@ -76,4 +77,8 @@ public static void setupBrowser(String platformType,String featureName) throws M
 	wait = new WebDriverWait(driver, 10);
 }
 
+public static void clickWithScroll(String desc) {
+	appiumDriver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).setMaxSearchSwipes(25).scrollIntoView(new UiSelector().description(\"" + desc + "\"))"));
+	appiumDriver.findElementByAccessibilityId(desc).click();
+}
 }

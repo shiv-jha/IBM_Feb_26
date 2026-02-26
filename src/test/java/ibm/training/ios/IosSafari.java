@@ -22,7 +22,6 @@ import io.appium.java_client.MobileElement;
 class IosSafari extends BaseClass {
 
 	
-	
 	public static void main(String[] args) throws MalformedURLException {
 		setupBrowser("ios", "sauce login");
 		driver.get("https://www.saucedemo.com/");

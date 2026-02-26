@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
 import ibm.training.setup.BaseClass;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 class BrowserstackIos extends BaseClass {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		setupApps("ios", "bs://d4b63dd37b963dff27922add882dab565a881387", "sample ios app");
+		setupApps("ios", "bs://823c73e457292e45f3975359be5b14d365ecf5d8", "sample ios app");
 	}
 
 	@AfterAll
@@ -24,9 +26,22 @@ class BrowserstackIos extends BaseClass {
 	}
 
 	@Test
-	void test() {
+	void testIosSampleApp() {
+		MobileElement el1 = (MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Text Button"));
+		el1.click();
+		MobileElement el2 =(MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Text Input"));
+		el2.click();
+		el2.sendKeys("Testing");
 		
-		System.out.println("ios app launched");
+		MobileElement el6 = (MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Return"));
+		el6.click();
+		MobileElement el7 = (MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Text Output"));
+		assertEquals("Testing", el7.getText());
+		MobileElement el8 = (MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Web View"));
+		el8.click();
+		MobileElement el9 = (MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("Web Testing - Test websites or web apps on real browsers"));
+		el9.click();
+			
 	}
 
 }
