@@ -15,7 +15,7 @@ class BrowserstackIos extends BaseClass {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		setupApps("ios", "bs://823c73e457292e45f3975359be5b14d365ecf5d8", "sample ios app");
+		setupApps("ios");
 	}
 
 	@AfterAll

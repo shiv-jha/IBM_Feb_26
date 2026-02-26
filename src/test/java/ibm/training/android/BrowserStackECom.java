@@ -17,7 +17,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -34,6 +36,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
@@ -42,10 +45,30 @@ class BrowserStackECom extends BaseClass {
 	
 	@BeforeAll 
 	 static void setUpBeforeClass() throws Exception {
-		setupApps( "android","bs://7e6768240ffaf5d55410014c7c022bcc9fec177d","ecommerce");	
+		setupApps( "android");	
 	}
 
 	@Test
+	@Order(0)
+	public void check() {
+		
+     
+	 clickWithScroll("add-to-cart-16");
+     
+	 appiumDriver.findElement(MobileBy.AccessibilityId("nav-cart")).click();
+     
+	 MobileElement e1=(MobileElement) appiumDriver.findElement(MobileBy.AccessibilityId("cart-item"));
+	 Point loc = e1.getLocation();
+     Dimension dimension = appiumDriver.manage().window().getSize();
+     TouchAction touchAction=  new TouchAction(appiumDriver);
+     TouchAction tochWithWait = touchAction.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500L)));
+     TouchAction tochWithPress = tochWithWait.press(PointOption.point(dimension.getWidth() - 200, loc.getY()));
+     tochWithPress.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500L))).moveTo(PointOption.point(dimension.getWidth() - 500, loc.getY())).release().perform();
+    
+     (appiumDriver.findElementByXPath("//*[@text = 'Delete']")).click();
+     assertEquals(appiumDriver.findElement(MobileBy.AccessibilityId("number-of-products")).getText(), "0 product(s) found.");
+}
+	//@Test
 	@Order(1)
 	void login() {
 		appiumDriver.findElementByAccessibilityId("menu").click();
@@ -57,14 +80,14 @@ class BrowserStackECom extends BaseClass {
 		appiumDriver.findElementByXPath("//android.widget.TextView[@text=\"Sign in\"]").click();
 	}
 	
-	@Test
+	//@Test
 	@Order(2)
 	void addToCart() {
 		clickWithScroll("add-to-cart-12");
 		clickWithScroll("add-to-cart-16");
 	}
 	
-	@Test
+	//@Test
 	@Order(3)
 	void checkout() {
 		appiumDriver.findElementByAccessibilityId("nav-cart").click();

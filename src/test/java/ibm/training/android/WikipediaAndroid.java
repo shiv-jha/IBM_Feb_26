@@ -26,7 +26,7 @@ class WikipediaAndroid extends BaseClass{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		setupApps( "android","bs://7c00be543fb646e1eda898567cfc9ed22d274791","Wikipedia app");	
+		setupApps( "android");	
 	}
 
 	@Test

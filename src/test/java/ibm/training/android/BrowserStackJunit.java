@@ -40,7 +40,7 @@ class BrowserStackJunit extends BaseClass {
 	
 	@BeforeAll 
 	 static void setUpBeforeClass() throws Exception {
-		setupApps( "android","bs://49419f8dbba53bdec25555bde2636623a28bce7c","sample native app");	
+		setupApps( "android");	
 	}
 
 	@Test
